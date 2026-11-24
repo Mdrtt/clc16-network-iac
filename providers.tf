@@ -1,5 +1,3 @@
-providers.tf
-
 terraform {
   required_providers {
     aws = {
@@ -10,14 +8,13 @@ terraform {
 }
 
 provider "aws" {
-  # Configuration options
   region = "us-east-1"
 
   default_tags {
     tags = {
       Environment = "dev"
       Project     = "clc16-network-iac"
-      Turma       = "clc16"
+      Turma      = "clc16"
     }
   }
 }
