@@ -14,7 +14,7 @@ provider "aws" {
     tags = {
       Environment = "dev"
       Project     = "clc16-network-iac"
-      Turma      = "clc16"
+      Turma       = "clc16"
     }
   }
 }
