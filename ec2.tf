@@ -15,10 +15,11 @@ data "aws_ami" "amazon_linux" {
 
 resource "aws_instance" "web_server" {
   #checkov:skip=CKV_AWS_88:Public IP is intentional for this web server lab
+  #checkov:skip=CKV_AWS_41:AWS Academy lab does not permit creating IAM roles
 
-  ami                         = data.aws_ami.amazon_linux.id
+  ami                        = data.aws_ami.amazon_linux.id
   instance_type               = "t2.micro"
-  subnet_id                   = aws_subnet.public_subnet_1c.id
+  subnet_id                  = aws_subnet.public_subnet_1c.id
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
 
