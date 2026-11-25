@@ -1,5 +1,4 @@
 name: Deploy Infrastructure
-
 on:
   push:
     branches:
@@ -14,34 +13,29 @@ env:
 
 jobs:
   Checkov:
-    name: Check Terraform Security
+    name: 'Check TF Vuls'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4	
         with:
           python-version: "3.10"
-
-      - name: Run Checkov
+      - name: Test with Checkov
+        id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
           directory: .
           framework: terraform
-
   Apply:
-    name: Apply Changes
+    name: 'Apply Changes'
     runs-on: ubuntu-latest
     environment: production
     needs: Checkov
-
     defaults:
       run:
         shell: bash
-
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,6 +47,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
+        
       - name: Terraform Apply
-        run: terraform apply --auto-approve -var-file="terraform.tfvars"
+        run: terraform apply --auto-approve
