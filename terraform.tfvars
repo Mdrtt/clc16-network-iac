@@ -1,7 +1,6 @@
+env = "prd"
 
-env = "dev"
-
-vpc_name = "terraform_vpc"
+vpc_name = "mateus-tf"
 
 pub_subnet_1a_name  = "tf_public_subnet_1a"
 pub_subnet_1c_name  = "tf_public_subnet_1c"
